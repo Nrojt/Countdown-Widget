@@ -6,6 +6,6 @@
     android:minHeight="20dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="0"
+    android:updatePeriodMillis="3600"
     android:widgetCategory="home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"/>

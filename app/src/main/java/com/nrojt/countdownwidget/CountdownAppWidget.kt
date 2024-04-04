@@ -19,6 +19,8 @@ import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
 import androidx.glance.text.Text
+import com.nrojt.countdownwidget.utils.TimeFormatter
+import java.time.LocalDateTime
 
 class CountdownAppWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -37,6 +39,9 @@ class CountdownAppWidget : GlanceAppWidget() {
     @Composable
     private fun CountdownWidgetContent() {
         val repository = remember { CountdownRepository() }
+        val timeFormatter : TimeFormatter = remember { TimeFormatter() }
+        val targetDateTime = LocalDateTime.of(2025, 1, 1, 0, 0) // Temporary target date
+        val timeTill = timeFormatter.formatTimeTill(targetDateTime)
 
         Column(
             modifier = GlanceModifier.fillMaxSize().background(imageProvider = ImageProvider(
@@ -46,7 +51,7 @@ class CountdownAppWidget : GlanceAppWidget() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Hello World", modifier = GlanceModifier.padding(12.dp))
+            Text(timeTill, modifier = GlanceModifier.padding(12.dp))
             Row(horizontalAlignment = Alignment.CenterHorizontally) {
                 Button(
                     text = "Edit",

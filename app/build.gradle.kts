@@ -35,21 +35,38 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.11"
+    }
+
 }
 
 dependencies {
 
+    val composeBom = platform("androidx.compose:compose-bom:2024.03.00")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation("androidx.glance:glance:1.1.0-beta01")
-    implementation("androidx.glance:glance-appwidget:1.1.0-beta01")
-    implementation ("androidx.glance:glance-material3:1.0.0")
-    implementation ("androidx.glance:glance-material:1.0.0")
+
+    implementation(libs.androidx.glance)
+    implementation(libs.androidx.glance.appwidget)
+    implementation (libs.androidx.glance.material3)
+
+    implementation(libs.androidx.material3.android)
+    implementation (libs.androidx.ui)
+    implementation (libs.androidx.ui.framework)
+    implementation (libs.androidx.activity.compose)
 
 
-
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

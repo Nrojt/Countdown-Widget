@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nrojt.countdownwidget"
-        minSdk = 28
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -61,12 +61,10 @@ dependencies {
 
     implementation(libs.androidx.material3.android)
     implementation (libs.androidx.ui)
-    implementation (libs.androidx.ui.framework)
     implementation (libs.androidx.activity.compose)
 
-
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

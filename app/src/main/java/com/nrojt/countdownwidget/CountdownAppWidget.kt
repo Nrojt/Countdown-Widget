@@ -31,22 +31,23 @@ class CountdownAppWidget : GlanceAppWidget() {
 
         provideContent {
             // create your AppWidget here
-            CountdownWidgetContent()
+            CountdownWidgetContent(context, id)
         }
     }
 
     @Composable
-    private fun CountdownWidgetContent() {
-        val repository = remember { CountdownRepository(0) }
-        // val updater = remember { CountdownWidgetUpdater() }
+    private fun CountdownWidgetContent(context: Context, id: GlanceId) {
+        val repository = remember { CountdownRepository(context) }
+        val updater = remember { CountdownWidgetUpdater(context, id) }
+        val countdownWidgetID = id.toString()
 
         val timeFormatter = TimeFormatter()
-        val targetDateTime = repository.getCountdownData()
+        val targetDateTime = repository.getCountdownData(countdownWidgetID)
         val timeTill = timeFormatter.formatTimeTill(targetDateTime)
 
         Column(
             modifier = GlanceModifier.fillMaxSize().background(imageProvider = ImageProvider(
-                repository.getBackgroundImage()
+                repository.getBackgroundImage(countdownWidgetID)
             )
             ),
             verticalAlignment = Alignment.CenterVertically,

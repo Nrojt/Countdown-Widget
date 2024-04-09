@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.googleProtobuf)
 }
 
 android {
@@ -62,6 +63,13 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation (libs.androidx.ui)
     implementation (libs.androidx.activity.compose)
+
+    implementation (libs.androidx.datastore)
+    implementation(libs.protobuf.javalite)
+    implementation(libs.protobuf.kotlin.lite)
+
+
+
 
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)

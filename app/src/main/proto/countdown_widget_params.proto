@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.nrojt.countdownwidget";
+option java_multiple_files = true;
+
+message CountdownWidgetParams {
+  string id = 1;
+  string backgroundImage = 2;
+  string datetime = 3;
+}

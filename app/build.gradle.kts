@@ -43,37 +43,52 @@ android {
         kotlinCompilerExtensionVersion = "1.5.11"
     }
 
-}
-
-dependencies {
-
-    val composeBom = platform("androidx.compose:compose-bom:2024.03.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    implementation(libs.androidx.glance)
-    implementation(libs.androidx.glance.appwidget)
-    implementation (libs.androidx.glance.material3)
-
-    implementation(libs.androidx.material3.android)
-    implementation (libs.androidx.ui)
-    implementation (libs.androidx.activity.compose)
-
-    implementation (libs.androidx.datastore)
-    implementation(libs.protobuf.javalite)
-    implementation(libs.protobuf.kotlin.lite)
+    protobuf {
+        protoc {
+            artifact = "com.google.protobuf:protoc:4.26.1"
+        }
+        generateProtoTasks {
+            all().forEach { task ->
+                task.builtins {
+                    create("java") {
+                        option("lite")
+                    }
+                    create("kotlin") {
+                        option("lite")
+                    }
+                }
+            }
+        }
+    }
 
 
+    dependencies {
+
+        val composeBom = platform("androidx.compose:compose-bom:2024.03.00")
+        implementation(composeBom)
+        androidTestImplementation(composeBom)
+
+        implementation(libs.androidx.datastore)
+        implementation(libs.protobuf.javalite)
+        implementation(libs.protobuf.kotlin.lite)
+
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.material)
+
+        implementation(libs.androidx.glance)
+        implementation(libs.androidx.glance.appwidget)
+        implementation(libs.androidx.glance.material3)
+
+        implementation(libs.androidx.material3.android)
+        implementation(libs.androidx.ui)
+        implementation(libs.androidx.activity.compose)
 
 
-    implementation(libs.androidx.ui.tooling.preview)
-    debugImplementation(libs.androidx.ui.tooling)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+        implementation(libs.androidx.ui.tooling.preview)
+        debugImplementation(libs.androidx.ui.tooling)
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
+    }
 }

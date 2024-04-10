@@ -4,9 +4,10 @@ import java.time.LocalDateTime
 import java.time.Duration
 
 class TimeFormatter {
-    fun formatTimeTill(targetDateTime: LocalDateTime): String {
+    fun formatTimeTill(targetDateTime: String): String {
+        val targetDateTimeConverted : LocalDateTime = LocalDateTime.parse(targetDateTime)
         val now = LocalDateTime.now()
-        val duration = Duration.between(now, targetDateTime)
+        val duration = Duration.between(now, targetDateTimeConverted)
 
         val days = duration.toDays()
         val hours = duration.toHours() % 24

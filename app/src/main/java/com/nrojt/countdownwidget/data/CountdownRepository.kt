@@ -5,6 +5,10 @@ import com.nrojt.countdownwidget.CountdownWidgetParams
 import com.nrojt.countdownwidget.R
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.concurrent.ThreadLocalRandom
 
 class CountdownRepository(context : Context) {
     private val dataStore = context.countdownWidgetParamDataStore
@@ -23,8 +27,9 @@ class CountdownRepository(context : Context) {
             // if it is, create a new widget data with the default values
             val newWidgetData = CountdownWidgetParams.newBuilder()
                 .setId(countdownWidgetId)
-                .setDatetime("2025-01-01T00:00:00")
+                .setDatetime(getRandomDateTime())
                 .setBackgroundImage(defaultBackgroundImageUri)
+                .setTitle("Countdown")
                 .build()
             // save the new widget data
             saveWidgetData(newWidgetData)
@@ -32,6 +37,12 @@ class CountdownRepository(context : Context) {
         }
 
         return widgetData
+    }
+
+    suspend fun getAllWidgetData(): List<CountdownWidgetParams> {
+        return dataStore.data.map { countdownWidgetParams ->
+            countdownWidgetParams
+        }.toList()
     }
 
     suspend fun saveWidgetData(widgetData : CountdownWidgetParams) {
@@ -55,4 +66,29 @@ class CountdownRepository(context : Context) {
                 .build()
         }
     }
+
+    suspend fun deleteWidgetData(widgetData : CountdownWidgetParams) {
+        // using the datastore to delete the widget data
+            dataStore.updateData { currentData ->
+                if (currentData.id == widgetData.id) {
+                    currentData.toBuilder().clear().build()
+                } else {
+                    currentData
+                }
+        }
+    }
+}
+
+private fun getRandomDateTime(): String {
+    val start = LocalDateTime.now()
+    val end = LocalDateTime.of(2030, 12, 31, 23, 59)
+
+    val startSeconds = start.toEpochSecond(java.time.ZoneOffset.UTC)
+    val endSeconds = end.toEpochSecond(java.time.ZoneOffset.UTC)
+    val randomSeconds = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds)
+
+    val randomDateTime = LocalDateTime.ofEpochSecond(randomSeconds, 0, java.time.ZoneOffset.UTC)
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+
+    return randomDateTime.format(formatter)
 }

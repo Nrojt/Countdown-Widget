@@ -70,6 +70,8 @@ class CountdownAppWidget : GlanceAppWidget() {
 
             val backgroundUri = Uri.parse(widgetData!!.backgroundImage)
 
+
+
             // Composable UI code using the retrieved data
             Column(
                 modifier = GlanceModifier.fillMaxSize().background(
@@ -80,11 +82,12 @@ class CountdownAppWidget : GlanceAppWidget() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(timeTill, modifier = GlanceModifier.padding(12.dp))
+                Text(widgetData!!.title, modifier = GlanceModifier.padding(8.dp))
+                Text(timeTill, modifier = GlanceModifier.padding(8.dp))
                 Row(horizontalAlignment = Alignment.CenterHorizontally) {
                     Button(
                         text = "Edit",
-                        onClick = actionStartActivity<MainActivity>()
+                        onClick = actionStartActivity<CountdownWidgetConfigureActivity>()
                     )
                 }
                 Spacer(modifier = GlanceModifier.padding(12.dp))

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.googleProtobuf)
+    alias(libs.plugins.googleKSP)
 }
 
 android {
@@ -84,6 +85,11 @@ android {
         implementation(libs.androidx.ui)
         implementation(libs.androidx.activity.compose)
 
+        implementation(libs.symbol.processing.api)
+
+        // room
+        implementation(libs.androidx.room.runtime)
+        ksp(libs.androidx.room.compiler)
 
         implementation(libs.androidx.ui.tooling.preview)
         debugImplementation(libs.androidx.ui.tooling)

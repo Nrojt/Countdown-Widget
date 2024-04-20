@@ -1,7 +1,7 @@
 [versions]
 activityCompose = "1.8.2"
 agp = "8.3.2"
-datastoreVersion = "1.0.0"
+datastoreVersion = "1.1.0"
 glance = "1.1.0-beta01"
 glanceMaterial = "1.0.0"
 kotlin = "1.9.23"
@@ -13,6 +13,8 @@ appcompat = "1.6.1"
 material = "1.11.0"
 material3Android = "1.2.1"
 protobufJavalite = "4.26.1"
+roomRuntimeVersion = "2.6.1"
+symbolProcessingApi = "1.9.23-1.0.20"
 ui = "1.6.5"
 uiToolingPreview = "1.6.5"
 uiTooling = "1.6.5"
@@ -25,6 +27,8 @@ androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "d
 androidx-glance = { module = "androidx.glance:glance", version.ref = "glance" }
 androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
 androidx-glance-material3 = { module = "androidx.glance:glance-material3", version.ref = "glanceMaterial" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntimeVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeVersion" }
 androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -36,9 +40,10 @@ androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
 protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufJavalite" }
 protobuf-kotlin-lite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobufJavalite" }
+symbol-processing-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "symbolProcessingApi" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 googleProtobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
-
+googleKSP = { id = "com.google.devtools.ksp", version.ref = "symbolProcessingApi" }
